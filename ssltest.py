@@ -130,13 +130,13 @@ def unpack_handshake(pay):
 
 def is_vulnerable(host, timeout, port=443):
     """ Check if remote host is vulnerable to heartbleed
-
+        Pil Ho -- Modified to work with UDP
      Returns:
         None  -- If remote host has no ssl
         False -- Remote host has ssl but likely not vulnerable
         True  -- Remote host might be vulnerable
     """
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.settimeout(int(timeout))
     try:
         s.connect((host, int(port)))
