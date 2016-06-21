@@ -25,7 +25,7 @@ counter = defaultdict(int)
 lock = threading.Lock()
 
 options = OptionParser(usage='%prog <network> [network2] [network3] ...', description='Test for SSL heartbleed vulnerability (CVE-2014-0160) on multiple domains')
-options.add_option('--port', '-p', dest="port", default=443, help="Port to scan on all hosts or networks, default 443")
+options.add_option('--port', '-p', dest="port", default=1194, help="Port to scan on all hosts or networks, default 1194")
 options.add_option('--input', '-i', dest="input_file", default=[], action="append", help="Optional input file of networks or ip addresses, one address per line")
 options.add_option('--logfile', '-o', dest="log_file", default="results.txt", help="Optional logfile destination")
 options.add_option('--resume', dest="resume", action="store_true", default=False, help="Do not rescan hosts that are already in the logfile")
@@ -128,7 +128,7 @@ def unpack_handshake(pay):
         offset = offset+l+4
     return payarr
 
-def is_vulnerable(host, timeout, port=443):
+def is_vulnerable(host, timeout, port=1194):
     """ Check if remote host is vulnerable to heartbleed
         Pil Ho -- Modified to work with UDP
      Returns:
